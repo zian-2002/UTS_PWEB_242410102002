@@ -6,33 +6,30 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    // Halaman Login
+   
     public function login()
     {
         return view('login');
     }
 
-    // Proses Login → redirect ke dashboard dengan parameter username
+    
     public function doLogin(Request $request)
     {
         $username = $request->input('username');
-        // redirect ke dashboard dengan parameter username
+        
         return redirect()->route('dashboard', ['username' => $username]);
     }
 
-    // Halaman Dashboard
     public function dashboard(Request $request)
     {
         $username = $request->query('username');
         return view('dashboard', compact('username'));
     }
 
-    // Halaman Profile
     public function profile(Request $request)
     {
         $username = $request->query('username');
 
-        // Data profil dikirim ke view
         $profile = [
             'nama' => $username ?? 'Zian Alfina Ramadhani',
             'umur' => 20,
@@ -43,10 +40,9 @@ class PageController extends Controller
         return view('profile', compact('profile', 'username'));
     }
 
-    // Halaman Pengelolaan Produk
     public function pengelolaan(Request $request)
     {
-        $username = $request->query('username'); // ambil juga kalau mau dikirim ke view
+        $username = $request->query('username'); 
 
         $produk = [
             ['nama' => 'DRW Glowing', 'harga' => 100000, 'stok' => 30],
